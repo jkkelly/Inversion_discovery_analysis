@@ -16,11 +16,8 @@ Four programs conduct the nucleotide sequence analyses
 	python Pi.by.gene.py ---> chrom+".gene.pairwise.pi.txt"
 2.  Determine nucleotide diversity for each gene classifying lines according to whether standard or inverted within each inversion.
 	python pi_within_between_karyotypes_genic.py --->   pi.byinv.genic.detailed.txt
-3.  Apply ...		
-
-	python pi_within_between_ancestral_derived_genic.py
-		Input: revised_inv_list.v3.txt
-		Output: pi.byinv.genic.AD.txt
+3.  Apply polarization (Ancestral/Derived/Unclear) to each inversion and extract mean values (per inversion) for each statistic.		
+	python pi_within_between_ancestral_derived_genic.py ---> pi.byinv.genic.AD.txt
 
 	python Pi.by.region.py	[inv_ID] 
 		---> [inv_ID].pairwise.pi.genomic_windows.txt
