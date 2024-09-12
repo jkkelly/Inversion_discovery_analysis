@@ -19,9 +19,7 @@ Four programs conduct the nucleotide sequence analyses
 3.  Apply polarization (Ancestral/Derived/Unclear) to each inversion and extract mean values (per inversion) for each statistic.		
 	python pi_within_between_ancestral_derived_genic.py ---> pi.byinv.genic.AD.txt
 4.  Calculate nucleotide diversity statistics in genomic windows from upstream to downstream of each inversion.
-   	python Pi.by.region.py [inv_ID]
-    		---> [inv_ID].pairwise.pi.genomic_windows.txt
-    		---> [inv_ID].AA_AD_DD.pi.genomic_windows.txt.gz
+   	python Pi.by.region.py [inv_ID] ---> [inv_ID].pairwise.pi.genomic_windows.txt, [inv_ID].AA_AD_DD.pi.genomic_windows.txt.gz (64 of each file)
 
 The expression level input files were published with Veltsos and Kelly (2024) The quantitative genetics of gene expression in Mimulus guttatus. PLOS Genetics 20:e1011072. DOI: 10.1371/journal.pgen.1011072.  These analyses were conducted on a draft assembly and annotation of the genome.  The v1 assembly is archived by JGI, the annotation is included here as a gff3 file. 
 
