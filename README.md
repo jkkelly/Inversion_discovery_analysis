@@ -22,13 +22,17 @@ Four programs conduct the nucleotide sequence analyses
 1.  Determine the number of aligned positions and differing positions of across the ten assemblies.  Summarizes are output for each gene on each chromosome.
 
 	python Pi.by.gene.py ---> chrom+".gene.pairwise.pi.txt"
-3.  Determine nucleotide diversity for each gene classifying lines according to whether standard or inverted within each inversion.
+
+2.  Determine nucleotide diversity for each gene classifying lines according to whether standard or inverted within each inversion.
 
 	python pi_within_between_karyotypes_genic.py --->   pi.byinv.genic.detailed.txt
-4.  Apply polarization (Ancestral/Derived/Unclear) to each inversion and extract mean values (per inversion) for each statistic.
+
+3.  Apply polarization (Ancestral/Derived/Unclear) to each inversion and extract mean values (per inversion) for each statistic.
 		
 	python pi_within_between_ancestral_derived_genic.py ---> pi.byinv.genic.AD.txt
-5.  Calculate nucleotide diversity statistics in genomic windows from upstream to downstream of each inversion.
+
+4.  Calculate nucleotide diversity statistics in genomic windows from upstream to downstream of each inversion.
+   
    	python Pi.by.region.py [inv_ID] ---> [inv_ID].pairwise.pi.genomic_windows.txt, [inv_ID].AA_AD_DD.pi.genomic_windows.txt.gz (64 of each file)
 
 
