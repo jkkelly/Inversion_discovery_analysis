@@ -18,8 +18,8 @@ Four programs conduct the nucleotide sequence analyses
 	python pi_within_between_karyotypes_genic.py --->   pi.byinv.genic.detailed.txt
 3.  Apply polarization (Ancestral/Derived/Unclear) to each inversion and extract mean values (per inversion) for each statistic.		
 	python pi_within_between_ancestral_derived_genic.py ---> pi.byinv.genic.AD.txt
-
-	python Pi.by.region.py	[inv_ID] 
+4.  Calculate nucleotide diversity statistics in genomic windows from upstream to downstream of each inversion.
+	python Pi.by.region.py [inv_ID] 
 		---> [inv_ID].pairwise.pi.genomic_windows.txt
 		---> [inv_ID].AA_AD_DD.pi.genomic_windows.txt.gz
 
