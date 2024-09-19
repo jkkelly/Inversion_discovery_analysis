@@ -1,6 +1,8 @@
 # Inversion_discovery_analysis
 python programs related to the identification and description of inversion polymorphisms in Mimulus guttatus 
 
+Two programs to run Anchorwave aligning each chromosome of our nine alternative genomes to the IM767 reference genome: 00_anchorwave_preprocessing.py, 02_Anchor_wave_parallel.py
+
 Four programs align genes to inversions
 1. Determine the IM767 genes that were present in each alternative line assembly
    
