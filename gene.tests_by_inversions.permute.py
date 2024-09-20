@@ -125,7 +125,7 @@ for rp in range(NoPerms):
 				pwd[4]=pwd[1]
 			elif ad_by_gene=="Derived":
 				pwd[3]=pwd[1]
-				pwd[4]=pwd[2]
+				pwd[4]=pwd[0]
 
 			pwd[1]=pwd_within[1]/float(pwd_within[0]) # within cross types 
 

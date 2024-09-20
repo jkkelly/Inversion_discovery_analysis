@@ -65,8 +65,7 @@ for line_id, liner in enumerate(inx):
 inx.close()
 
 big1=[ [],[],[],[],[],[] ]
-lx1=[]
-lx2=[]
+
 for g in alpha:
 	n0 = len(alpha[g]["RR"])
 	n1 = len(alpha[g]["RI"])
@@ -83,15 +82,17 @@ for g in alpha:
 		m0=np.average(alpha[g]["RR"])
 		m1=np.average(alpha[g]["RI"])
 		var_tot = sum((xi - m) ** 2 for xi in alpha[g]["y"]) / float(len(alpha[g]["y"])-1.0)
-		lx2.append(var_tot)
+
 		absy=[]
 		for xi in alpha[g]["y"]:
 			absy.append(abs(xi))
 		ma = np.average(absy)
-		lx1.append( ma )
+
 
 		pwd=[-99,-99,-99,-99,-99] # within RR, within RI, between RR/RI, within Anc, within Derived
+
 		pwd_within=[0,0.0]
+
 		if n0>1:
 			
 			dist=[0,0.0]
@@ -99,7 +100,7 @@ for g in alpha:
 				for j in range(i+1,n0): 
 					dist[0]+=1
 					dist[1]+=abs(alpha[g]["RR"][i]-alpha[g]["RR"][j])
-			pwd[0]=dist[1]/float(dist[0])
+			pwd[0]=dist[1]/float(dist[0]) # RR
 			pwd_within[0]+=dist[0]
 			pwd_within[1]+=dist[1]
 		if n1>1:
@@ -109,16 +110,18 @@ for g in alpha:
 				for j in range(i+1,n1): 
 					dist[0]+=1
 					dist[1]+=abs(alpha[g]["RI"][i]-alpha[g]["RI"][j])
-			pwd[1]=dist[1]/float(dist[0])
+			pwd[1]=dist[1]/float(dist[0]) # RI
 			pwd_within[0]+=dist[0]
 			pwd_within[1]+=dist[1]
+
+		pwd_total=[pwd_within[0],pwd_within[1]]
 
 		if ad_by_gene=="Ancestral":
 			pwd[3]=pwd[0]
 			pwd[4]=pwd[1]
 		elif ad_by_gene=="Derived":
 			pwd[3]=pwd[1]
-			pwd[4]=pwd[2]
+			pwd[4]=pwd[0]
 
 		dist=[0,0.0]
 		for i in range(n0):
@@ -127,12 +130,15 @@ for g in alpha:
 				dist[1]+=abs(alpha[g]["RR"][i]-alpha[g]["RI"][j])
 		pwd[2]=dist[1]/float(dist[0]) # between cross types
 		pwd[1]=pwd_within[1]/float(pwd_within[0]) # within cross types
+		pwd_total[0]+=dist[0]
+		pwd_total[1]+=dist[1]
+		pwd[0]=pwd_total[1]/float(pwd_total[0]) # overall pwd
 
-		out1a.write('\t'+str(ma)+'\t'+str(m0)+'\t'+str(m1)+'\t'+str(var_tot)+'\t'+str(pwd[2]))
+		out1a.write('\t'+str(pwd[0])+'\t'+str(pwd[2]))
 		out1a.write('\t'+str(n0)+'\t'+str(n1)+'\t'+str(pwd[1])+'\t'+str(pwd[3])+'\t'+str(pwd[4])+"\n")
 		
 		if posr=="within": # all genes within inversions
-			big1[0].append(abs(m1)-abs(m0))
+			big1[0].append(pwd[0])
 			big1[1].append(pwd[2])
 			big1[2].append(pwd[1])
 			if pwd[3]>=0.0:
@@ -140,28 +146,24 @@ for g in alpha:
 			if pwd[4]>=0.0:
 				big1[4].append(pwd[4])
 
-print( "INV genes: mean absolute",np.average(lx1),"Vg cis (raw estimates) ",np.average(lx2) )
-print( "means across genes, six stats" )
+print( "means across genes, inversion gene stats" )
 for j in range(5):
 	print( j,len(big1[j]),np.average(big1[j]) )
 
 
 lx1=[]
-lx2=[]
-lx3=[]
+
 for g in alphaNI: # results for colinear genome
 	if len(alphaNI[g]["y"])>=Min_genes:
-		absy=[]
-		for xi in alphaNI[g]["y"]:
-			absy.append(abs(xi))
-		ma = np.average(absy)
+		dist=[0,0.0]
+		for i in range(len(alphaNI[g]["y"])-1):
+			for j in range(i+1,len(alphaNI[g]["y"])): 
+				dist[0]+=1
+				dist[1]+=abs(alphaNI[g]["y"][i]-alphaNI[g]["y"][j])
 
-		m = sum(alphaNI[g]["y"]) / float(len(alphaNI[g]["y"]))
-		var_res = sum((xi - m) ** 2 for xi in alphaNI[g]["y"]) / float(len(alphaNI[g]["y"])-1.0)
-		lx1.append(ma)
-		lx2.append(var_res)
-		lx3.append(sqrt(var_res))
-print( len(lx1),"Background genes: mean absolute",np.average(lx1),"Vg cis (raw estimates) ",np.average(lx2)," sqrt vg ",np.average(lx3) )
+		lx1.append( dist[1]/float(dist[0]) )
+
+print( len(lx1),"Background genes: mean pwd",np.average(lx1) )
 
 
 
