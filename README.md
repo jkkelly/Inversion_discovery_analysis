@@ -55,7 +55,7 @@ Four programs analyze expression variation of genes
 
 
 4.  The partitioning calculations from the previous program (gene.tests_by_inversions.py) is nested within a loop that permutes estimates across orientations within genes.
-           
+           
       python gene.tests_by_inversions.permute.py ---> perm.stats
 
 
