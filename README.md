@@ -53,10 +53,10 @@ Four programs analyze expression variation of genes
 
       python gene.tests_by_inversions.py  ---> Alpha.by.gene.txt
 
-
 4.  The partitioning calculations from the previous program (gene.tests_by_inversions.py) is nested within a loop that permutes estimates across orientations within genes.
-           
-      python gene.tests_by_inversions.permute.py ---> perm.stats
+  
+  
+	python gene.tests_by_inversions.permute.py ---> perm.stats
 
 
 The expression level input files were published with Veltsos and Kelly (2024) The quantitative genetics of gene expression in Mimulus guttatus. PLOS Genetics 20:e1011072. DOI: 10.1371/journal.pgen.1011072.  The programs listed above were applied using a draft assembly and annotation of the genome of the IM767 genome.  This "v1 assembly" is archived by JGI, the annotation of the v1 is included here as a gff3 file. 
