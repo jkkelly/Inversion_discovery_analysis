@@ -1,0 +1,83 @@
+# Inversion_discovery_analysis
+# Python programs related to the identification and description of inversion polymorphisms in Mimulus guttatus
+# The programs are written in python3 and all were tested using Linux (Ubuntu)
+# The programs depend on the following python libraries: sys, sklearn, numpy, random, math. 
+
+---
+description: >
+  Python programs related to the identification and description of inversion polymorphisms in Mimulus guttatus.
+
+anchorwave-related_programs:
+  - name: 00_anchorwave_preprocessing.py
+    description: >
+      Preprocesses data for Anchorwave alignment, aligning each chromosome of our nine alternative genomes to the IM767 reference genome.
+  - name: 02_Anchor_wave_parallel.py
+    description: >
+      Runs Anchorwave in parallel for each chromosome of our nine alternative genomes to the IM767 reference genome.
+
+gene_alignment_programs:
+  - name: Genes.present.by.cross.py
+    description: >
+      Determines the IM767 genes that were present in each alternative line assembly.
+    output: Genes_scored_by_cross.txt
+  - name: Genes.within.inversions.py
+    description: >
+      Identifies genes within or flanking each inversion.
+    output: Genes.within_flanking.inversions
+  - name: Inversions.to.genotypedgenes.py
+    description: >
+      Relates inversion coordinates to the specific genes within the genetic maps.
+    output: inv.gg.txt
+  - name: Inversion.genotypes.py
+    description: >
+      Determines the inversion genotype for all 64 inversions in each of the 1588 plants measured for gene expression in Veltsos and Kelly (2024).
+    output: [inv_id].genotype.txt (64 files)
+
+nucleotide_sequence_analysis_programs:
+  - name: Pi.by.gene.py
+    description: >
+      Determines the number of aligned positions and differing positions across the ten assemblies. Summarizes are output for each gene on each chromosome.
+    output: chrom+".gene.pairwise.pi.txt"
+  - name: pi_within_between_karyotypes_genic.py
+    description: >
+      Determines nucleotide diversity for each gene, classifying lines according to whether standard or inverted within each inversion.
+    output: pi.byinv.genic.detailed.txt
+  - name: pi_within_between_ancestral_derived_genic.py
+    description: >
+      Applies polarization (Ancestral/Derived/Unclear) to each inversion and extracts mean values (per inversion) for each statistic.
+    output: pi.byinv.genic.AD.txt
+  - name: Pi.by.region.py
+    description: >
+      Calculates nucleotide diversity statistics in genomic windows from upstream to downstream of each inversion.
+    output: 
+      - [inv_ID].pairwise.pi.genomic_windows.txt
+      - [inv_ID].AA_AD_DD.pi.genomic_windows.txt.gz (64 of each file)
+
+expression_variation_analysis_programs:
+  - name: reads.per.plant.py
+    description: >
+      Retrieves read counts from the original mapping of RNAseq reads to the genomes.
+    output: raw.reads.per.plant.txt
+  - name: Test.all.genes.minCPM.py
+    description: >
+      Performs a linear regression of standardized expression level of each F2 within each cross for each gene using the count of the alternative allele as the independent variable.
+    output: Gene_by_cross.tests.v2.txt
+  - name: gene.tests_by_inversions.py
+    description: >
+      Tests whether genes within inversions exhibit greater cis genetic variation than in the remainder of the genome. For all genes internal to inversions, partitions the pairwise differences in expression effects within and between orientations.
+    output: Alpha.by.gene.txt
+  - name: gene.tests_by_inversions.permute.py
+    description: >
+      The partitioning calculations from the previous program (gene.tests_by_inversions.py) is nested within a loop that permutes estimates across orientations within genes.
+    output: perm.stats
+
+references:
+  - title: >
+      The expression level input files were published with Veltsos and Kelly (2024) The quantitative genetics of gene expression in Mimulus guttatus.
+    journal: PLOS Genetics
+    volume: 20
+    article: e1011072
+    doi: 10.1371/journal.pgen.1011072
+    note: >
+      The programs listed above were applied using a draft assembly and annotation of the genome of the IM767 genome. This "v1 assembly" is archived by JGI, the annotation of the v1 is included here as a gff3 file.
+...
